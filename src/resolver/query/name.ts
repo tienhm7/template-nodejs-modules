@@ -1,5 +1,6 @@
 import { NameModel, IName } from "../../model";
 import { Input, Output } from "req-res-formatter";
+import config from "../../config/config";
 
 const queryName = {
     names: async (req: any, res: any) => {
@@ -8,7 +9,7 @@ const queryName = {
         let names: IName[];
 
         if (page) {
-            offset = offset ? offset : 5;
+            offset = offset ? offset : config.offset;
             names = await NameModel.find()
                 .skip(Math.abs((page - 1) * offset))
                 .limit(offset);
